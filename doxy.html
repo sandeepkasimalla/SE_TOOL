@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+      <head>
+          <style>
+
+             #myDIV {
+             height: 700px;
+             width: 1500px;
+             overflow: auto;}
+
+      .button {
+         border-style: solid;
+         border-color:white ;
+         background-color:black;
+         color: LawnGreen;
+         padding: 5px 10px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 16px;
+         margin: 2px 0px;
+         cursor: pointer;
+      }
+
+          </style>
+
+          <meta charset="UTF-8">
+
+          <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+ 
+      </head>
+      <body>
+        
+
+
+   <p> Doxygen</p>
+
+        
+         <script type="text/javascript" src="socket.io.min.js"></script>
+         <script type="text/javascript" charset="utf-8">
+              var socket = io.connect('http://127.0.0.1:5000');
+              socket.on('connect', function() {
+              //socket.emit('my event', 'doxywizard');
+              socket.emit('my event', 'doxywizard &' );
+
+              //socket.emit('my event', 'wmctrl -a Chrome' );
+              });
+         </script>
+
+	 <form action="/action_page.php">
+		  Working directory from which doxygen will run<br>
+		  <input type="text" name="doxy_dir" id="doxy_dir" value="doxy_dir">
+		  <br>
+		  Project name <br>
+		  <input type="text" name="project" id="project" value="project"><br>
+		  Source code directory <br>
+		  <input type="text" name="src_dir" id="src_dir" value="src_dir"><br>
+		  Destination directory <br>
+		  <input type="text" name="des_dir" id="des_dir" value="des_dir"><br>
+		  Select desired extraction mode <br>
+		  <input type="radio" name="entity" value="entity1" checked> All Entities<br>
+		  <input type="radio" name="entity" value="entity2"> Documented entities only<br>
+
+		  Select programming language to optimise the results for <br>
+		  <input type="radio" name="language" value="lan1" checked> Optimise for C++ output<br>
+		  <input type="radio" name="language" value="lan2"> Optimise for C++/CLI output<br>
+		  <input type="radio" name="language" value="lan3"> Optimise for Java or C# output<br>
+		  <input type="radio" name="language" value="lan4"> Optimise for C or PHP output<br>
+		  <input type="radio" name="language" value="lan5"> Optimise for Fortran output<br>
+		  <input type="radio" name="language" value="lan6"> Optimise for VHDL output<br>
+
+
+		  <br><br>
+		  <input type="button" onclick = "buttonCode()">
+	 </form> 
+
+
+
+
+      <script>
+
+
+
+           function buttonCode(){
+              //socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key s && xdotool key e &&  xdotool key t  && xdotool key o && xdotool key o && xdotool key l');
+            var entity = document.querySelector('input[name="entity"]:checked').value
+            var language = document.querySelector('input[name="language"]:checked').value
+            var doxy_dir = document.getElementById("doxy_dir").value
+            var project = document.getElementById("project").value
+            var src_dir = document.getElementById("src_dir").value
+            var des_dir = document.getElementById("des_dir").value
+            console.log(entity)
+            console.log(language)
+            console.log(doxy_dir)
+       
+            let len = doxy_dir.length;
+            var doxy_dir1 = ""
+            for(let i = 0; i<len; i++){
+                if(doxy_dir[i]=='/'){
+                doxy_dir1 +=  "&& xdotool key backslash";}
+                else{
+                doxy_dir1 +=  "&& xdotool key "+doxy_dir[i];}
+                
+            }
+                        console.log(doxy_dir1)
+            let len1 = project.length;
+            var project1 = ""
+            for(let i = 0; i<len1; i++){
+                if(project[i]=='/'){
+                project1 +=  "&& xdotool key backslash";}
+                else{
+                project1 +=  "&& xdotool key "+project[i];}
+                
+            }
+
+            let len2 = src_dir.length;
+            var src_dir1 = ""
+            for(let i = 0; i<len2; i++){
+                if(src_dir[i]=='/'){
+                src_dir1 +=  "&& xdotool key backslash";}
+                else{
+                src_dir1 +=  "&& xdotool key "+src_dir[i];}
+                
+            }
+
+            let len3 = des_dir.length;
+            var des_dir1 = ""
+            for(let i = 0; i<len3; i++){
+                if(des_dir[i]=='/'){
+                des_dir1 +=  "&& xdotool key backslash";}
+                else{
+                des_dir1 +=  "&& xdotool key "+des_dir[i];}
+                
+            }
+
+
+           
+            //socket.emit('my event', 'doxywizard &' );
+	    //socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key s && xdotool key e &&  xdotool key t  && xdotool key o && xdotool key o && xdotool key l');
+	    //socket.emit('my event', 'wmctrl -a Doxygen GUI frontend ' +doxy_dir1+ ' && xdotool key Tab && xdotool key space && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key space');
+            socket.emit('my event', 'wmctrl -a Doxygen GUI frontend ' +doxy_dir1);
+            //socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key space');
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab' );
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend ' +project1);
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Tab' );
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend ' +src_dir1);
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Tab' );
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend ' +des_dir1);
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key space' );
+            if(entity == "entity1"){
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Down' );}
+            else{
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab' );}
+            if(language=="lan1"){
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab' );}
+            else if(language=="lan2"){
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Down' );}
+            else if(language=="lan3"){
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Down && xdotool key Down' );}
+            else if(language=="lan4"){	    
+            socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Down && xdotool key Down && xdotool key Down' );}
+
+            else if(language=="lan5"){
+            socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Down && xdotool key Down && xdotool key Down && xdotool key Down' );}
+
+            else{
+            socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key Down && xdotool key Down && xdotool key Down && xdotool key Down && xdotool key Down' );
+
+
+            }
+	    socket.emit('my event', 'wmctrl -a Doxygen GUI frontend && xdotool key Tab && xdotool key Tab && xdotool key space && xdotool key space && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key Tab && xdotool key space' );
+
+	    socket.emit('my event', 'sleep 0.2 && wmctrl -a Doxygen GUI frontend && xdotool key Tab && sleep 0.2 && xdotool key Tab && sleep 0.2 && xdotool key Tab && sleep 0.2 && xdotool key space' );
+
+	    socket.emit('my event', 'sleep 0.2 && wmctrl -a Doxygen GUI frontend && xdotool key Tab && sleep 0.2 && xdotool key Tab && sleep 0.2 && xdotool key Tab && sleep 0.2 && xdotool key Tab && sleep 0.2 && xdotool key space' );
+
+	    socket.emit('my event', 'sleep 0.2 && wmctrl -a Doxygen GUI frontend && xdotool key Tab && sleep 0.2 && xdotool key Tab && sleep 0.2 && xdotool key space' );
+
+
+            socket.emit('my event' , 'pkill doxywizard');
+	    socket.emit('my event', 'python3 parser.py');
+
+          
+       
+          }
+
+
+
+ 
+       </script>
+
+      </body>
+</html>

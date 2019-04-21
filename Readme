@@ -1,0 +1,39 @@
+Required tools:
+xdotool (key strokes), wmctrl(activating windows)
+
+installation:
+
+xdotool:  sudo apt-get install xdotool
+
+wmctrl:   sudo apt-get install wmctrl
+
+----------------------------------------------------------------------------------------------
+Steps to run the tool:
+
+1. Open terminal in linux and run python server in the folder in which seetool folder is there.
+
+2. Open  doxy.html file in any browser.
+
+3. Fill the form in the browser as required.
+
+4. Click the button to get the output.
+
+5. Output will be in the Terminal.
+
+
+-------------------------------------------------------------------------------------------------
+
+Doxygen will generate a document for given source code.
+
+It will give html, xml files etc., which will consists of description about the source code.
+
+I have vizualized the architecture of the source code by parsing the html file.
+
+Run the parser.py file in terminal for vizualised architecture of the source code.
+
+Here are two tasks one is running the doxygen and the second one is parsing the generated html file.
+
+For combing the both tasks as one I have used the python server as third party for running doxygen in background.
+
+
+
